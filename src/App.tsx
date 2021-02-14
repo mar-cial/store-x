@@ -1,26 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+// Imports
+import { useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
+import { Route, Switch, useLocation } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+// Pages
+import Home from './Pages/Home';
+
+// Components
+
+// Sections
+import Navigation from './Sections/Navigation';
+import Header from './Sections/Header';
+import Products from './Pages/Products';
+
+// Assets
+
+// App start
+const App: React.FC = () => {
+    const [openMenu, setOpenMenu] = useState(false);
+
+    const handleOpenMenu = () => {
+        setOpenMenu((v) => !v);
+        console.log(openMenu);
+    };
+
+    let location = useLocation();
+    console.log(location.key);
+    return (
+        <>
+            <Navigation open={openMenu} />
+            <Header open={openMenu} click={handleOpenMenu} />
+            <>
+                <AnimatePresence exitBeforeEnter>
+                    <Switch location={location} key={location.key}>
+                        <Route path="/" exact>
+                            <Home />
+                        </Route>
+                        <Route path="/products">
+                            <Products />
+                        </Route>
+                    </Switch>
+                </AnimatePresence>
+            </>
+        </>
+    );
+};
 
 export default App;
