@@ -55,7 +55,7 @@ const Navigation: React.FC<NavigationInterface> = ({ open }) => {
     let routes = [
         { route: '/', linkText: 'home' },
         { route: '/products', linkText: 'products' },
-        { route: '/', linkText: 'services' },
+        { route: '/services', linkText: 'services' },
         { route: '/', linkText: 'about' },
     ];
     return (

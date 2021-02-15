@@ -5,20 +5,21 @@ import { Route, Switch, useLocation } from 'react-router-dom';
 
 // Pages
 import Home from './Pages/Home';
+import Products from './Pages/Products';
+import Services from './Pages/Services';
 
 // Components
 
 // Sections
 import Navigation from './Sections/Navigation';
 import Header from './Sections/Header';
-import Products from './Pages/Products';
 
 // Assets
+import palette from './Assets/colorPalette';
 
 // App start
 const App: React.FC = () => {
     const [openMenu, setOpenMenu] = useState(false);
-
     const handleOpenMenu = () => {
         setOpenMenu((v) => !v);
         console.log(openMenu);
@@ -34,10 +35,13 @@ const App: React.FC = () => {
                 <AnimatePresence exitBeforeEnter>
                     <Switch location={location} key={location.key}>
                         <Route path="/" exact>
-                            <Home />
+                            <Home colors={palette} />
                         </Route>
-                        <Route path="/products">
+                        <Route path="/products" exact>
                             <Products />
+                        </Route>
+                        <Route path="/services" exact>
+                            <Services />
                         </Route>
                     </Switch>
                 </AnimatePresence>
